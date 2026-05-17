@@ -2,7 +2,11 @@ import bcrypt from 'bcryptjs';
 import postgres from 'postgres';
 import { invoices, customers, revenue, users } from '../lib/placeholder-data';
 
-const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
+if (!process.env.POSTGRES_URL) {
+  throw new Error('POSTGRES_URL is not defined in the environment variables.');
+}
+
+const sql = postgres(process.env.POSTGRES_URL, { ssl: 'require' });
 
 async function seedUsers(sql:any) {
   await sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;

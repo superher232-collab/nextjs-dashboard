@@ -1,10 +1,4 @@
-import postgres from 'postgres';
-
-if (!process.env.POSTGRES_URL) {
-  throw new Error('POSTGRES_URL is not defined in the environment variables.');
-}
-
-const sql = postgres(process.env.POSTGRES_URL, { ssl: 'require' });
+import { sql } from '@/app/lib/db';
 
 async function listInvoices() {
 	const data = await sql`

@@ -1,4 +1,3 @@
-import postgres from 'postgres';
 import {
   CustomerField,
   CustomersTableType,
@@ -8,12 +7,7 @@ import {
   Revenue,
 } from './definitions';
 import { formatCurrency } from './utils';
-
-if (!process.env.POSTGRES_URL) {
-  throw new Error('POSTGRES_URL is not defined in the environment variables.');
-}
-
-const sql = postgres(process.env.POSTGRES_URL, { ssl: 'require' });
+import { sql } from './db';
 
 export async function fetchRevenue() {
   try {

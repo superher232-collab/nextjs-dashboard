@@ -287,6 +287,13 @@ function executeQuery(sqlQuery: string, params: any[]): any {
     return { changes: 1 };
   }
 
+  // 17. Fetch user by email (offline support)
+  if (upper.includes('SELECT * FROM USERS WHERE EMAIL =') || upper.includes('SELECT * FROM USERS WHERE EMAIL=?')) {
+    const email = params[0];
+    const user = state.users.find(u => u.email === email);
+    return user ? [user] : [];
+  }
+
   // 16. Skip schema definition statements (like extensions, seed inserts, etc.)
   if (upper.includes('CREATE TABLE') || upper.includes('CREATE EXTENSION') || upper.includes('INSERT INTO USERS')) {
     return [];

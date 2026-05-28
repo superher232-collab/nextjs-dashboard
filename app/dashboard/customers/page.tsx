@@ -3,7 +3,7 @@ import { fetchFilteredCustomers } from '@/app/lib/data';
 import CustomersTable from '@/app/ui/customers/table';
 
 export const metadata: Metadata = {
-  title: 'Customers | Acme Dashboard',
+  title: 'Customers',
   description: 'Manage your Acme customers, view their dynamic avatars, outstanding invoices, and complete details.',
 };
 
